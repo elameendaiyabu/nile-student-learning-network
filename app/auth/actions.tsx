@@ -19,6 +19,8 @@ export async function signup(formData: FormData) {
       data: {
         first_name: firstName,
         last_name: lastName,
+        username: "NIL",
+        about: "NIL",
       },
     },
   })
@@ -54,4 +56,29 @@ export async function login(formData: FormData) {
 
   revalidatePath("/")
   redirect("/")
+}
+
+export async function updateUserData(formData: FormData) {
+  const supabase = createClient()
+
+  const firstName = formData.get("firstName") as string
+  const lastName = formData.get("lastName") as string
+  const userName = formData.get("userName") as string
+  const about = formData.get("about") as string
+
+  const { data, error } = await supabase.auth.updateUser({
+    data: {
+      first_name: firstName,
+      last_name: lastName,
+      username: userName,
+      about: about,
+    },
+  })
+
+  if (error) {
+    throw new Error(error.message)
+  }
+
+  revalidatePath("/profile")
+  redirect("/profile")
 }
