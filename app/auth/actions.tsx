@@ -21,6 +21,7 @@ export async function signup(formData: FormData) {
         last_name: lastName,
         username: "NIL",
         about: "NIL",
+        role: "user",
       },
     },
   })
