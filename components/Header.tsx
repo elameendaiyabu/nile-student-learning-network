@@ -12,10 +12,18 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { CircleUser, Menu, Share2 } from "lucide-react"
 import { ThemeSwitcher } from "./ThemeSwitcher"
+import { logout } from "@/app/auth/actions"
+import { createClient } from "@/utils/supabase/server"
 
 type Props = {}
 
-export default function Header({}: Props) {
+export default async function Header({}: Props) {
+  const supabase = createClient()
+
+  const { data, error } = await supabase.auth.getUser()
+
+  console.log(data)
+
   return (
     <header className="sticky z-50 top-0 flex h-16 items-center gap-4 border-b dark:border-b-foreground/20  bg-opacity-60 backdrop-blur-md px-4 md:px-6">
       <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
@@ -50,7 +58,10 @@ export default function Header({}: Props) {
       </nav>
       <Sheet>
         <SheetTrigger asChild>
-          <Button size="icon" className="shrink-0 md:hidden">
+          <Button
+            size="icon"
+            className="shrink-0 bg-black dark:bg-white hover:bg-black/90 dark:hover:bg-white/90 md:hidden"
+          >
             <Menu className="h-5 w-5" />
             <span className="sr-only">Toggle navigation menu</span>
           </Button>
@@ -80,25 +91,54 @@ export default function Header({}: Props) {
         <form className="ml-auto flex-1 sm:flex-initial">
           <div className="relative"></div>
         </form>
+
+        <Button variant="link">Become a Tutor</Button>
+
         <ThemeSwitcher />
 
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button size="icon" className="rounded-full">
-              <CircleUser className="h-5 w-5" />
-              <span className="sr-only">Toggle user menu</span>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Settings</DropdownMenuItem>
-            <DropdownMenuItem>Support</DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Logout</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        {data.user == null ? (
+          <>
+            <Link href="/auth/login">
+              <Button variant="ghost">Login</Button>
+            </Link>
+            <Link href="/auth/signup">
+              <Button>Sign Up</Button>
+            </Link>
+          </>
+        ) : (
+          <ProfileMenu />
+        )}
       </div>
     </header>
+  )
+}
+
+export function ProfileMenu() {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button
+          size="icon"
+          className="rounded-full bg-black dark:bg-white hover:bg-black/90 dark:hover:bg-white/90"
+        >
+          <CircleUser className="h-5 w-5" />
+          <span className="sr-only">Toggle user menu</span>
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>
+          <Link href="/profile">Profile Settings</Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem>Support</DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>
+          <form action={logout} className="w-full">
+            <button className=" w-full text-left">Logout</button>
+          </form>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   )
 }
