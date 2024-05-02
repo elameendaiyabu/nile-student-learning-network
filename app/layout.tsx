@@ -4,6 +4,9 @@ import "./globals.css"
 import Providers from "../components/theme-providers"
 import Header from "@/components/Header"
 import { Toaster } from "@/components/ui/toaster"
+import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin"
+import { extractRouterConfig } from "uploadthing/server"
+import { ourFileRouter } from "@/app/api/uploadthing/core"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -20,6 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
+        <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
         <Providers>
           <Header />
           <Toaster />

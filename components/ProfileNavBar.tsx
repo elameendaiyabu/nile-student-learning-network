@@ -16,7 +16,7 @@ export default function ProfileNavBar({}: Props) {
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Link
-                    href="/profile"
+                    href="/settings/profile"
                     className="flex h-9 w-9 mb-3 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
                   >
                     <ToggleGroupItem value="user">
@@ -30,7 +30,7 @@ export default function ProfileNavBar({}: Props) {
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Link
-                    href="#"
+                    href="/settings/upload"
                     className="flex h-9 w-9 mb-3 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
                   >
                     <ToggleGroupItem value="upload">

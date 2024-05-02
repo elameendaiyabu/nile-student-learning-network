@@ -37,6 +37,7 @@ export async function logout() {
 
   await supabase.auth.signOut()
   revalidatePath("/")
+  redirect("/")
 }
 
 export async function login(formData: FormData) {

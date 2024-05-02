@@ -25,7 +25,7 @@ export default async function ProfileFormUpdate({}: Props) {
   const { data, error } = await supabase.auth.getUser()
 
   return (
-    <div className=" pl-16 pr-2 w-full">
+    <div className=" pl-16 pt-2 pr-2 w-full">
       <Card>
         <CardHeader>
           <CardTitle>Profile</CardTitle>
