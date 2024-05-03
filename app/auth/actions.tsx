@@ -81,6 +81,41 @@ export async function updateUserData(formData: FormData) {
     throw new Error(error.message)
   }
 
-  revalidatePath("/profile")
-  redirect("/profile")
+  revalidatePath("/settings/profile")
+  redirect("/settings/profile")
+}
+
+export async function tutorSignUp(formData: FormData) {
+  const supabase = createClient()
+  const department = formData.get("department") as string
+  const rate = formData.get("rate") as string
+  const teaching_method = formData.get("teaching_method") as string
+  const is_available = formData.get("is_available") as string
+  const level = formData.get("level") as string
+  const description = formData.get("description") as string
+  const number = formData.get("number") as string
+  const full_name = formData.get("full_name") as string
+
+  const { data: user } = await supabase.auth.getUser()
+
+  const { data, error } = await supabase
+    .from("tutor")
+    .insert({
+      department: department,
+      rate: rate,
+      teaching_method: teaching_method,
+      is_available: is_available,
+      level: level,
+      description: description,
+      number: number,
+      full_name: full_name,
+    })
+    .eq("user_id", user.user?.id)
+
+  if (error) {
+    throw new Error(error.message)
+  }
+
+  revalidatePath("/")
+  redirect("/")
 }

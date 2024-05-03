@@ -7,6 +7,7 @@ import { Button } from "./ui/button"
 import { createClient } from "@/utils/supabase/server"
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -145,7 +146,9 @@ export function FormUpdateDialog({ data }: { data: any }) {
           </div>
 
           <DialogFooter>
-            <SubmitUpdatedForm />
+            <DialogClose>
+              <SubmitUpdatedForm />
+            </DialogClose>
           </DialogFooter>
         </form>
       </DialogContent>

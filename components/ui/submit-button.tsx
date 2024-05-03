@@ -63,3 +63,22 @@ export function SubmitUpdatedForm() {
     </Button>
   )
 }
+export function SubmitTutorSignupForm() {
+  const { pending } = useFormStatus()
+  const { toast } = useToast()
+
+  return (
+    <Button
+      className="w-full"
+      type="submit"
+      onClick={() => {
+        toast({
+          description: "Tutor Profile Created",
+        })
+      }}
+      disabled={pending}
+    >
+      {pending ? "Registering" : "Register"}
+    </Button>
+  )
+}

@@ -75,7 +75,9 @@ export default async function Header({}: Props) {
             <Link href="/" className="">
               Popular
             </Link>
-            <Button variant="link">Become a Tutor</Button>
+            <Link className="flex justify-center" href="/tutor-signup">
+              <Button variant="link">Become a Tutor</Button>
+            </Link>
           </nav>
         </SheetContent>
       </Sheet>
@@ -84,9 +86,11 @@ export default async function Header({}: Props) {
           <div className="relative"></div>
         </form>
 
-        <Button className="hidden sm:contents" variant="link">
-          Become a Tutor
-        </Button>
+        <Link href="/tutor-signup">
+          <Button className=" hidden  sm:block" variant="link">
+            Become a Tutor
+          </Button>
+        </Link>
 
         <ThemeSwitcher />
 

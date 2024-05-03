@@ -11,20 +11,30 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 
-type CardProps = React.ComponentProps<typeof Card>
+interface tutorInfo {
+  number: string
+  full_name: string
+  description: string
+  department: string
+  skills: string[]
+  teaching_method: string
+  rate: string
+  level: string
+  is_available: boolean
+}
 
-const skills = ["python", "dance", "music", "great", "youth", "threat"]
+const skills = [""]
 
-export function TutorCard({ className, ...props }: CardProps) {
+export function TutorCard({ tutorInfo }: { tutorInfo: tutorInfo }) {
   return (
-    <Card className={cn("w-[350px] ", className)} {...props}>
+    <Card className={cn("w-[350px] ")}>
       <CardHeader>
         <CardDescription className=" flex justify-between ">
           <p className=" flex gap-2 ">
             <Star className="text-green-800 fill-green-800" />
-            <span className="mt-[0.2rem]">5.0/5 (10 jobs)</span>
+            <span className="mt-[0.2rem]">{tutorInfo.level}</span>
           </p>
-          <p>💲85/hr</p>
+          <p>💲{tutorInfo.rate}/hr</p>
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -33,9 +43,9 @@ export function TutorCard({ className, ...props }: CardProps) {
             <div className=" h-24 w-24 rounded-full bg-neutral-400"></div>
           </div>
           <div>
-            <p>El-ameen Daiyabu</p>
+            <p>{tutorInfo.full_name}</p>
             <CardDescription>
-              <p>Computer Science</p>
+              <p>{tutorInfo.department}</p>
               <div>
                 <Skills skills={skills} />
               </div>
