@@ -17,6 +17,8 @@ import {
 } from "./ui/dialog"
 import { updateUserData } from "@/app/auth/actions"
 import { SubmitUpdatedForm } from "./ui/submit-button"
+import { UploadProfilePicture } from "./UploadFile"
+import Image from "next/image"
 
 type Props = {}
 
@@ -81,13 +83,17 @@ export default async function ProfileFormUpdate({}: Props) {
               <CardDescription>Write a short description about yourself</CardDescription>
             </div>
             <div>
-              <Label>Profile Photo</Label>
-              <div className="flex gap-4">
-                <div className=" w-32 h-32 bg-neutral-100 rounded-full mt-4"></div>
-                <div className="flex items-center">
-                  <Button type="button">Change Picture</Button>
-                </div>
-              </div>
+              <Label>
+                Profile Photo{" "}
+                <span className="text-muted-foreground">
+                  ( view and edit profile picture below )
+                </span>
+              </Label>
+              <div
+                className="grid mt-5 gap-4 w-40 h-40 bg-center bg-cover rounded-full bg-no-repeat"
+                style={{ backgroundImage: `url(${data.user?.user_metadata.profile_picture})` }}
+              ></div>
+              <UploadProfilePicture />
             </div>
           </form>
         </CardContent>

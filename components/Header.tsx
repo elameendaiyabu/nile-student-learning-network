@@ -22,8 +22,6 @@ export default async function Header({}: Props) {
 
   const { data, error } = await supabase.auth.getUser()
 
-  console.log(data)
-
   return (
     <header className="sticky z-50 top-0 flex h-16 items-center gap-4 border-b dark:border-b-foreground/20  bg-opacity-60 backdrop-blur-md px-4 md:px-6">
       <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
@@ -127,15 +125,17 @@ export function ProfileMenu() {
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <Link href="/settings/profile">Settings</Link>
+          <Link href="/settings/profile" className="w-full">
+            Settings
+          </Link>
         </DropdownMenuItem>
         <DropdownMenuItem>Support</DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          <form action={logout} className="w-full">
+        <form action={logout} className="w-full">
+          <DropdownMenuItem>
             <button className=" w-full text-left">Logout</button>
-          </form>
-        </DropdownMenuItem>
+          </DropdownMenuItem>
+        </form>
       </DropdownMenuContent>
     </DropdownMenu>
   )

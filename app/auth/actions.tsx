@@ -22,6 +22,7 @@ export async function signup(formData: FormData) {
         username: "NIL",
         about: "NIL",
         role: "user",
+        profile_photo: "https://utfs.io/f/cc472175-cb4c-4d84-816a-57f3d5df1770-zd5dhh.webp",
       },
     },
   })
@@ -97,6 +98,13 @@ export async function tutorSignUp(formData: FormData) {
   const full_name = formData.get("full_name") as string
 
   const { data: user } = await supabase.auth.getUser()
+
+  const { data: metadata } = await supabase.auth.updateUser({
+    data: {
+      role: "tutor",
+      profile_photo: "https://utfs.io/f/cc472175-cb4c-4d84-816a-57f3d5df1770-zd5dhh.webp",
+    },
+  })
 
   const { data, error } = await supabase
     .from("tutor")
