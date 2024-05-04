@@ -127,3 +127,24 @@ export async function tutorSignUp(formData: FormData) {
   revalidatePath("/")
   redirect("/")
 }
+
+export type SearchState = { data: string[] }
+
+export async function search(prevState: SearchState, formData: FormData) {
+  const supabase = createClient()
+
+  const search = formData.get("search") as string
+
+  const renewedSearch = search.replace(/\s+/g, "+")
+
+  const { data, error } = await supabase
+    .from("tutor")
+    .select()
+    .textSearch("full_name", renewedSearch)
+
+  if (error) {
+    throw new Error(error.message)
+  }
+
+  return { data }
+}

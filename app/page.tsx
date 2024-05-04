@@ -1,3 +1,4 @@
+import SearchBar from "@/components/SearchBar"
 import Tutors from "@/components/Tutors"
 
 export default function Home() {

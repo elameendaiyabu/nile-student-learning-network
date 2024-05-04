@@ -15,7 +15,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./ui/dialog"
-import { updateUserData } from "@/app/auth/actions"
+import { updateUserData } from "@/app/actions"
 import { SubmitUpdatedForm } from "./ui/submit-button"
 import { UploadProfilePicture } from "./UploadFile"
 import Image from "next/image"

@@ -5,7 +5,7 @@ import { Input } from "./ui/input"
 import { Textarea } from "./ui/textarea"
 import { Button } from "./ui/button"
 import { SubmitTutorSignupForm } from "./ui/submit-button"
-import { tutorSignUp } from "@/app/auth/actions"
+import { tutorSignUp } from "@/app/actions"
 import { createClient } from "@/utils/supabase/server"
 
 type Props = {}

@@ -4,7 +4,6 @@ import React from "react"
 import { UploadButton, UploadDropzone } from "./ui/uploadthing"
 import { useToast } from "./ui/use-toast"
 import { createClient } from "@/utils/supabase/client"
-import { revalidatePath } from "next/cache"
 
 type Props = {}
 
@@ -77,11 +76,8 @@ export function UploadProfilePicture() {
           .eq("user_id", data.user?.id)
 
         toast({
-          description: "Upload Complete",
+          description: "Upload Complete. Refresh to see changes.",
         })
-
-        revalidatePath("/")
-        revalidatePath("/settings/profile")
       }}
       endpoint="imageUploader"
     />

@@ -10,10 +10,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { CircleUser, Menu, Share2 } from "lucide-react"
+import { CircleUser, Menu, Search, Share2 } from "lucide-react"
 import { ThemeSwitcher } from "./ThemeSwitcher"
-import { logout } from "@/app/auth/actions"
+import { logout, search } from "@/app/actions"
 import { createClient } from "@/utils/supabase/server"
+import { Input } from "./ui/input"
 
 type Props = {}
 
@@ -33,19 +34,13 @@ export default async function Header({}: Props) {
           href="/"
           className=" transition-colors hover:bg-black/10 dark:hover:bg-muted p-2 rounded"
         >
-          Home
+          Tutors
         </Link>
         <Link
           href="/"
           className=" transition-colors hover:bg-black/10  dark:hover:bg-muted p-2 rounded"
         >
-          Saved
-        </Link>
-        <Link
-          href="/"
-          className=" transition-colors hover:bg-black/10  dark:hover:bg-muted p-2 rounded"
-        >
-          Popular
+          Favourites
         </Link>
       </nav>
       <Sheet>
@@ -65,14 +60,12 @@ export default async function Header({}: Props) {
               <span className="sr-only">Skill Learning Network for Students</span>
             </Link>
             <Link href="/" className="">
-              Home
+              Tutors
             </Link>
             <Link href="/" className="">
-              Saved
+              Favourites
             </Link>
-            <Link href="/" className="">
-              Popular
-            </Link>
+
             <Link className="flex justify-center" href="/tutor-signup">
               <Button variant="link">Become a Tutor</Button>
             </Link>
@@ -84,11 +77,15 @@ export default async function Header({}: Props) {
           <div className="relative"></div>
         </form>
 
-        <Link href="/tutor-signup">
-          <Button className=" hidden  sm:block" variant="link">
-            Become a Tutor
-          </Button>
-        </Link>
+        {data.user?.user_metadata.role == "tutor" ? (
+          ""
+        ) : (
+          <Link href="/tutor-signup">
+            <Button className=" hidden  sm:block" variant="link">
+              Become a Tutor
+            </Button>
+          </Link>
+        )}
 
         <ThemeSwitcher />
 
