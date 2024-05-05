@@ -125,7 +125,8 @@ export async function tutorSignUp(formData: FormData) {
   }
 
   revalidatePath("/")
-  redirect("/")
+  revalidatePath("/")
+  redirect("/settings/profile")
 }
 
 export type SearchState = { data: string[] }
@@ -147,4 +148,16 @@ export async function search(prevState: SearchState, formData: FormData) {
   }
 
   return { data }
+}
+
+export async function updateSkills(array: string[], formData: FormData) {
+  const supabase = createClient()
+
+  const { data: user } = await supabase.auth.getUser()
+
+  const { data, error } = await supabase
+    .from("tutor")
+    .update([{ skills: array }])
+    .eq("user_id", user.user?.id)
+  if (data) revalidatePath("/settings/profile")
 }

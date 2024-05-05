@@ -25,22 +25,16 @@ export default async function Header({}: Props) {
 
   return (
     <header className="sticky z-50 top-0 flex h-16 items-center gap-4 border-b dark:border-b-foreground/20  bg-opacity-60 backdrop-blur-md px-4 md:px-6">
-      <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
+      <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-2xl lg:gap-6">
         <Link href="/" className="flex items-center gap-2 text-lg font-semibold md:text-base">
           <Share2 className=" h-6 w-6" />
           <span className="sr-only">Skill Learning Network for Students</span>
         </Link>
         <Link
           href="/"
-          className=" transition-colors hover:bg-black/10 dark:hover:bg-muted p-2 rounded"
+          className=" transition-colors w-96 hover:bg-black/10 dark:hover:bg-muted p-2 rounded"
         >
-          Tutors
-        </Link>
-        <Link
-          href="/"
-          className=" transition-colors hover:bg-black/10  dark:hover:bg-muted p-2 rounded"
-        >
-          Favourites
+          Nile Network
         </Link>
       </nav>
       <Sheet>
@@ -60,10 +54,7 @@ export default async function Header({}: Props) {
               <span className="sr-only">Skill Learning Network for Students</span>
             </Link>
             <Link href="/" className="">
-              Tutors
-            </Link>
-            <Link href="/" className="">
-              Favourites
+              Nile Network
             </Link>
 
             <Link className="flex justify-center" href="/tutor-signup">

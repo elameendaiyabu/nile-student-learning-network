@@ -19,6 +19,7 @@ import { updateUserData } from "@/app/actions"
 import { SubmitUpdatedForm } from "./ui/submit-button"
 import { UploadProfilePicture } from "./UploadFile"
 import Image from "next/image"
+import AddSkills from "./AddSkills"
 
 type Props = {}
 
@@ -39,7 +40,7 @@ export default async function ProfileFormUpdate({}: Props) {
           {/* <Button variant="outline">Update Profile Data</Button> */}
         </CardHeader>
         <CardContent>
-          <form action="" className="sm:w-1/2">
+          <div className="sm:w-1/2">
             <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
               <div className="md:w-1/2">
                 <Label>First Name</Label>
@@ -77,6 +78,10 @@ export default async function ProfileFormUpdate({}: Props) {
               <Input disabled value={data.user?.email} type="email" name="email" />
             </div>
             <div className="mb-4">
+              <Label>Skills</Label>
+              <AddSkills />
+            </div>
+            <div className="mb-4">
               <Label>About</Label>
               <br />
               <Textarea disabled value={data.user?.user_metadata.about} name="about" />
@@ -95,7 +100,7 @@ export default async function ProfileFormUpdate({}: Props) {
               ></div>
               <UploadProfilePicture />
             </div>
-          </form>
+          </div>
         </CardContent>
       </Card>
     </div>

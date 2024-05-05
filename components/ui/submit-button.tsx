@@ -73,7 +73,7 @@ export function SubmitTutorSignupForm() {
       type="submit"
       onClick={() => {
         toast({
-          description: "Tutor Profile Created",
+          description: "Tutor Profile Created. Add Skills in Profile Settings!",
         })
       }}
       disabled={pending}
