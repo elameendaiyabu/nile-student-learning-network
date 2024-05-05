@@ -3,12 +3,12 @@ import React from "react"
 import { TutorCard } from "./TutorCard"
 import SearchBar from "./SearchBar"
 
-type Props = {}
-
-export default async function Tutors({}: Props) {
+export default async function Tutors() {
   const supabase = createClient()
 
   const { data: tutor, error } = await supabase.from("tutor").select("*")
+
+  console.log(tutor)
   return (
     <div className="pt-5 sm:px-5">
       <div className="w-full px-5 sm:px-0 flex mb-2 justify-end">

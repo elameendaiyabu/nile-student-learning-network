@@ -8,11 +8,9 @@ import { updateSkills } from "@/app/actions"
 import { useFormStatus } from "react-dom"
 import { createClient } from "@/utils/supabase/client"
 
-type Props = {}
-
 type Data = { skills: any }[] | null
 
-export default function AddSkills({}: Props) {
+export default function AddSkills() {
   const [isAdding, setIsAdding] = useState<boolean>(false)
   const [skillsArray, setSkillsArray] = useState<string[]>([])
   const [skill, setSkill] = useState<string>("")
@@ -31,8 +29,6 @@ export default function AddSkills({}: Props) {
         .eq("user_id", user.user?.id)
 
       setMySkills(data)
-      console.log(data)
-      console.log(skills)
     }
 
     getSkills()

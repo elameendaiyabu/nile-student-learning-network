@@ -48,8 +48,6 @@ interface tutorInfo {
   profile_picture: string
 }
 
-const skills = [""]
-
 export function TutorCard({ tutorInfo }: { tutorInfo: tutorInfo }) {
   return (
     <div>
@@ -143,7 +141,7 @@ export function CardDialog({ tutorInfo }: { tutorInfo: tutorInfo }) {
             <CardDescription>
               <p>{tutorInfo.department}</p>
               <div>
-                <Skills skills={skills} />
+                <Skills skills={tutorInfo.skills} />
               </div>
             </CardDescription>
           </div>
@@ -161,9 +159,7 @@ export function CardDialog({ tutorInfo }: { tutorInfo: tutorInfo }) {
 export function Skills({ skills }: { skills: string[] }) {
   return (
     <div className=" flex gap-1 flex-wrap">
-      {skills.map((item, index: number) => (
-        <SkillTab key={index} skill={item} />
-      ))}
+      {skills?.map((item, index: number) => <SkillTab key={index} skill={item} />)}
     </div>
   )
 }
