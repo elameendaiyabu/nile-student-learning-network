@@ -66,7 +66,7 @@ export default function AddSkills() {
       )}
       {mySkills?.map((item, index) => (
         <ul key={index}>
-          {item.skills.map((skill: string, skillIndex: number) => (
+          {item.skills?.map((skill: string, skillIndex: number) => (
             <li className="list-inside list-disc" key={skillIndex}>
               {skill}
             </li>

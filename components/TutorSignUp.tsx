@@ -33,7 +33,12 @@ export default async function TutorSignUp({}: Props) {
                 </CardHeader>
                 <CardContent className="flex flex-col gap-4">
                   <div className="flex flex-col gap-2">
-                    <Label>Experience Level</Label>
+                    <Label>
+                      Experience Level{" "}
+                      <span className="text-muted-foreground">
+                        (beginner, intermediate, or advance)
+                      </span>
+                    </Label>
                     <Input name="level" type="text" />
                   </div>
                   <div className="flex flex-col gap-2">
@@ -41,7 +46,10 @@ export default async function TutorSignUp({}: Props) {
                     <Input name="rate" type="text" />
                   </div>
                   <div className="flex flex-col gap-2">
-                    <Label>Teaching Method</Label>
+                    <Label>
+                      Teaching Method{" "}
+                      <span className="text-muted-foreground">(online or physical)</span>
+                    </Label>
                     <Input name="teaching_method" type="text" />
                   </div>
                   <div className="flex flex-col gap-2">

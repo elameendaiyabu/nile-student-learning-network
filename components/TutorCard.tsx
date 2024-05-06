@@ -33,6 +33,8 @@ import {
 } from "@/components/ui/drawer"
 import { createClient } from "@supabase/supabase-js"
 import Image from "next/image"
+import { Separator } from "./ui/separator"
+import PostedResources, { PostedResourcesMobile } from "./PostedResources"
 
 interface tutorInfo {
   number: string
@@ -56,24 +58,30 @@ export function TutorCard({ tutorInfo }: { tutorInfo: tutorInfo }) {
           <DialogTrigger asChild>
             <CardDialog tutorInfo={tutorInfo} />
           </DialogTrigger>
-          <DialogContent className="sm:max-w-[720px]">
+          <DialogContent className="sm:max-w-[960px] ">
             <DialogHeader>
               <DialogTitle>{tutorInfo.full_name}</DialogTitle>
-              <DialogDescription>{tutorInfo.description}</DialogDescription>
+              <DialogDescription className=" flex justify-between">
+                <div>Description: {tutorInfo.description}</div>
+                <div>{tutorInfo.department}</div>
+              </DialogDescription>
             </DialogHeader>
-            <div className="grid gap-4 py-4">
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="name" className="text-right">
-                  Name
-                </Label>
-                <Input id="name" defaultValue="Pedro Duarte" className="col-span-3" />
+            <div className="flex justify-between">
+              <div className="flex gap-2">
+                <span className=" flex items-center text-xl">Skills: </span>
+                <ul className=" flex gap-2">
+                  {tutorInfo.skills.map((item, index) => (
+                    <li className=" bg-muted p-2 rounded-md" key={index}>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="username" className="text-right">
-                  Username
-                </Label>
-                <Input id="username" defaultValue="@peduarte" className="col-span-3" />
-              </div>
+              <div>{tutorInfo.level}</div>
+            </div>
+            <Separator />
+            <div>
+              <PostedResources id={tutorInfo.user_id} />
             </div>
             <DialogFooter>
               <Button type="submit">
@@ -91,14 +99,34 @@ export function TutorCard({ tutorInfo }: { tutorInfo: tutorInfo }) {
           </DrawerTrigger>
           <DrawerContent>
             <DrawerHeader className="text-left">
-              <DrawerTitle>Edit profile</DrawerTitle>
-              <DrawerDescription>
-                Make changes to your profile here. Click save when you&apos;re done.
-              </DrawerDescription>
+              <DrawerTitle>{tutorInfo.full_name}</DrawerTitle>
+              <DrawerDescription>Description: {tutorInfo.description}</DrawerDescription>
+              <div className="text-muted-foreground">
+                <div>Level: {tutorInfo.level}</div>
+                <div>Department: {tutorInfo.department}</div>
+              </div>
+              <div>
+                <div className="flex gap-2">
+                  <span className=" flex items-center text-xl">Skills: </span>
+                  <ul className=" flex gap-2 flex-wrap">
+                    {tutorInfo.skills.map((item, index) => (
+                      <li className=" bg-muted p-2 rounded-md" key={index}>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+              <Separator />
             </DrawerHeader>
+            <PostedResourcesMobile id={tutorInfo.user_id} />
+
             <DrawerFooter className="pt-2">
               <DrawerClose asChild>
-                <Button variant="outline">Cancel</Button>
+                <Button>
+                  <MessageCircleMore />
+                  Contact Me!
+                </Button>
               </DrawerClose>
             </DrawerFooter>
           </DrawerContent>
@@ -110,7 +138,7 @@ export function TutorCard({ tutorInfo }: { tutorInfo: tutorInfo }) {
 
 export function CardDialog({ tutorInfo }: { tutorInfo: tutorInfo }) {
   return (
-    <Card className={cn("w-[330px] hover:cursor-pointer ")}>
+    <Card className={cn("w-[330px] sm:w-[375px] hover:cursor-pointer ")}>
       <CardHeader>
         <CardDescription className=" flex justify-between ">
           <p className=" flex gap-2 ">
@@ -125,17 +153,7 @@ export function CardDialog({ tutorInfo }: { tutorInfo: tutorInfo }) {
           <div
             style={{ backgroundImage: `url(${tutorInfo.profile_picture})` }}
             className="w-28 h-28 bg-center bg-cover rounded-full bg-no-repeat flex  items-center "
-          >
-            {/* <div className=" h-24 w-24">
-              <Image
-                src={tutorInfo.profile_picture}
-                alt=""
-                width={100}
-                height={100}
-                className=" rounded-3xl border border-foreground"
-              />
-            </div> */}
-          </div>
+          ></div>
           <div>
             <p>{tutorInfo.full_name}</p>
             <CardDescription>
