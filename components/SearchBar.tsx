@@ -13,7 +13,7 @@ type Props = {}
 
 export default function SearchBar({}: Props) {
   const data = [] // Declare the variable 'data'
-  const [state, formAction] = useFormState(search, [])
+  const [state, formAction] = useFormState(search, { data: [] })
   const [searchValue, setSearchValue] = useState<string>("a")
 
   let datas = state.data || []
