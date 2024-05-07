@@ -35,6 +35,7 @@ import { createClient } from "@supabase/supabase-js"
 import Image from "next/image"
 import { Separator } from "./ui/separator"
 import PostedResources, { PostedResourcesMobile } from "./PostedResources"
+import Link from "next/link"
 
 interface tutorInfo {
   number: string
@@ -51,6 +52,8 @@ interface tutorInfo {
 }
 
 export function TutorCard({ tutorInfo }: { tutorInfo: tutorInfo }) {
+  const newNumber = 234 + tutorInfo.number.slice(1)
+
   return (
     <div>
       <div className="hidden md:block">
@@ -84,10 +87,12 @@ export function TutorCard({ tutorInfo }: { tutorInfo: tutorInfo }) {
               <PostedResources id={tutorInfo.user_id} />
             </div>
             <DialogFooter>
-              <Button type="submit">
-                <MessageCircleMore />
-                Contact Me!
-              </Button>
+              <Link href={`https://wa.me/${newNumber}`} target="_blank">
+                <Button>
+                  <MessageCircleMore />
+                  Contact Me!
+                </Button>
+              </Link>
             </DialogFooter>
           </DialogContent>
         </Dialog>
@@ -123,10 +128,12 @@ export function TutorCard({ tutorInfo }: { tutorInfo: tutorInfo }) {
 
             <DrawerFooter className="pt-2">
               <DrawerClose asChild>
-                <Button>
-                  <MessageCircleMore />
-                  Contact Me!
-                </Button>
+                <Link href={`https://wa.me/${newNumber}`} target="_blank">
+                  <Button>
+                    <MessageCircleMore />
+                    Contact Me!
+                  </Button>
+                </Link>
               </DrawerClose>
             </DrawerFooter>
           </DrawerContent>

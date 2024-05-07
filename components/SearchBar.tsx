@@ -5,6 +5,9 @@ import React, { useState } from "react"
 import { useFormState } from "react-dom"
 import { Input } from "./ui/input"
 import { Search } from "lucide-react"
+import { Card, CardContent, CardHeader } from "./ui/card"
+import { Button } from "./ui/button"
+import Link from "next/link"
 
 type Props = {}
 
@@ -32,7 +35,16 @@ export default function SearchBar({}: Props) {
       ) : (
         <>
           {datas.map((item, index) => (
-            <p key={index}>{item.full_name}</p>
+            <Card className="mt-2" key={index}>
+              <CardHeader>
+                {item.full_name}
+                <Link href={`https://wa.me/234${item.number.slice(1)}`}>
+                  <Button className=" mt-1">Contact</Button>
+                </Link>
+              </CardHeader>
+
+              {/* {item.number} */}
+            </Card>
           ))}
         </>
       )}
