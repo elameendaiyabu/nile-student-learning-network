@@ -10,11 +10,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { CircleUser, Menu, Search, Share2 } from "lucide-react"
+import { CircleUser, Menu } from "lucide-react"
 import { ThemeSwitcher } from "./ThemeSwitcher"
-import { logout, search } from "@/app/actions"
+import { logout } from "@/app/actions"
 import { createClient } from "@/utils/supabase/server"
-import { Input } from "./ui/input"
+import Image from "next/image"
+import Nile from "@/public/Nile-Logo.png"
 
 type Props = {}
 
@@ -27,7 +28,7 @@ export default async function Header({}: Props) {
     <header className="sticky z-50 top-0 flex h-16 items-center gap-4 border-b dark:border-b-foreground/20  bg-opacity-60 backdrop-blur-md px-4 md:px-6">
       <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-2xl lg:gap-6">
         <Link href="/" className="flex items-center gap-2 text-lg font-semibold md:text-base">
-          <Share2 className=" h-6 w-6" />
+          <Image src={Nile} width={40} height={40} alt="logo" />
           <span className="sr-only">Skill Learning Network for Students</span>
         </Link>
         <Link
@@ -50,13 +51,10 @@ export default async function Header({}: Props) {
         <SheetContent side="left">
           <nav className="grid gap-6 text-lg font-medium">
             <Link href="/" className="flex items-center gap-2 text-lg font-semibold">
-              <Share2 className=" h-6 w-6" />
+              <Image src={Nile} width={40} height={40} alt="logo" />
+              Nile Network
               <span className="sr-only">Skill Learning Network for Students</span>
             </Link>
-            <Link href="/" className="">
-              Nile Network
-            </Link>
-
             <Link className="flex justify-center" href="/tutor-signup">
               <Button variant="link">Become a Tutor</Button>
             </Link>
