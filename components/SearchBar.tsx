@@ -39,7 +39,9 @@ export default function SearchBar({}: Props) {
               <CardHeader>
                 {item.full_name}
                 <Link href={`https://wa.me/234${item.number.slice(1)}`}>
-                  <Button className=" mt-1">Contact</Button>
+                  <Button type="button" className=" mt-1">
+                    Contact
+                  </Button>
                 </Link>
               </CardHeader>
 

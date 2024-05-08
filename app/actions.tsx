@@ -141,7 +141,7 @@ export async function search(prevState: SearchState, formData: FormData) {
   const { data, error } = await supabase
     .from("tutor")
     .select()
-    .textSearch("full_name", renewedSearch)
+    .textSearch("search_tutor", renewedSearch)
 
   if (error) {
     throw new Error(error.message)
