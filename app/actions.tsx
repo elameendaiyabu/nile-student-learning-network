@@ -27,7 +27,7 @@ export async function signup(formData: FormData) {
     },
   })
   if (error) {
-    throw new Error(error.message)
+    alert(error.message)
   }
 
   revalidatePath("/")
@@ -54,7 +54,7 @@ export async function login(formData: FormData) {
   })
 
   if (error) {
-    throw new Error(error.message)
+    alert(error.message)
   }
 
   revalidatePath("/")
@@ -79,7 +79,7 @@ export async function updateUserData(formData: FormData) {
   })
 
   if (error) {
-    throw new Error(error.message)
+    alert(error.message)
   }
 
   revalidatePath("/settings/profile")
@@ -121,11 +121,11 @@ export async function tutorSignUp(formData: FormData) {
     .eq("user_id", user.user?.id)
 
   if (error) {
-    throw new Error(error.message)
+    alert(error.message)
   }
 
   revalidatePath("/")
-  revalidatePath("/")
+  revalidatePath("/settings/profile")
   redirect("/settings/profile")
 }
 
@@ -144,7 +144,7 @@ export async function search(prevState: SearchState, formData: FormData) {
     .textSearch("search_tutor", renewedSearch)
 
   if (error) {
-    throw new Error(error.message)
+    alert(error.message)
   }
 
   return { data }

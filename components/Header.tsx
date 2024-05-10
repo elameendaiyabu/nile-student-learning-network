@@ -55,9 +55,11 @@ export default async function Header({}: Props) {
               Nile Network
               <span className="sr-only">Skill Learning Network for Students</span>
             </Link>
-            <Link className="flex justify-center" href="/tutor-signup">
-              <Button variant="link">Become a Tutor</Button>
-            </Link>
+            {data.user?.user_metadata.role == "user" && (
+              <Link className="flex justify-center" href="/tutor-signup">
+                <Button variant="link">Become a Tutor</Button>
+              </Link>
+            )}
           </nav>
         </SheetContent>
       </Sheet>
