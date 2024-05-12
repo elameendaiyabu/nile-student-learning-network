@@ -1,4 +1,5 @@
 import TutorSignUp from "@/components/TutorSignUp"
+import { createClient } from "@/utils/supabase/server"
 import React from "react"
 
 type Props = {}

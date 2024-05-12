@@ -27,7 +27,7 @@ export async function signup(formData: FormData) {
     },
   })
   if (error) {
-    alert(error.message)
+    throw new Error(error.message)
   }
 
   revalidatePath("/")
@@ -54,7 +54,7 @@ export async function login(formData: FormData) {
   })
 
   if (error) {
-    alert(error.message)
+    throw new Error(error.message)
   }
 
   revalidatePath("/")
@@ -79,7 +79,7 @@ export async function updateUserData(formData: FormData) {
   })
 
   if (error) {
-    alert(error.message)
+    throw new Error(error.message)
   }
 
   revalidatePath("/settings/profile")
@@ -121,7 +121,7 @@ export async function tutorSignUp(formData: FormData) {
     .eq("user_id", user.user?.id)
 
   if (error) {
-    alert(error.message)
+    throw new Error(error.message)
   }
 
   revalidatePath("/")
@@ -144,7 +144,7 @@ export async function search(prevState: SearchState, formData: FormData) {
     .textSearch("search_tutor", renewedSearch)
 
   if (error) {
-    alert(error.message)
+    throw new Error(error.message)
   }
 
   return { data }
@@ -160,4 +160,20 @@ export async function updateSkills(array: string[], formData: FormData) {
     .update([{ skills: array }])
     .eq("user_id", user.user?.id)
   if (data) revalidatePath("/settings/profile")
+}
+
+export default async function addComment(tutorId: string, formData: FormData) {
+  const supabase = createClient()
+
+  const comment = formData.get("comment") as string
+
+  const { data, error } = await supabase
+    .from("comments")
+    .insert({ comment: comment, tutor_id: tutorId })
+
+  if (error) {
+    throw new Error(error.message)
+  }
+
+  revalidatePath("/")
 }

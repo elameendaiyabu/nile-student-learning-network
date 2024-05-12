@@ -34,7 +34,7 @@ export function SubmitSignupButton() {
       type="submit"
       onClick={() => {
         toast({
-          description: "Sign Up Successful. Verify Email and Sign In",
+          description: "Sign Up Successful. Login to continue.",
         })
       }}
       disabled={pending}
@@ -63,6 +63,7 @@ export function SubmitUpdatedForm() {
     </Button>
   )
 }
+
 export function SubmitTutorSignupForm() {
   const { pending } = useFormStatus()
   const { toast } = useToast()
@@ -79,6 +80,25 @@ export function SubmitTutorSignupForm() {
       disabled={pending}
     >
       {pending ? "Registering" : "Register"}
+    </Button>
+  )
+}
+
+export function SubmitComment() {
+  const { pending } = useFormStatus()
+  const { toast } = useToast()
+
+  return (
+    <Button
+      type="submit"
+      onClick={() => {
+        toast({
+          description: "Comment Added",
+        })
+      }}
+      disabled={pending}
+    >
+      {pending ? "Posting" : "Post Comment"}
     </Button>
   )
 }

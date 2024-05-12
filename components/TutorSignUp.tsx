@@ -18,7 +18,7 @@ export default async function TutorSignUp({}: Props) {
   return (
     <div className="p-4 flex flex-col gap-5">
       <h1 className="text-center text-xl md:text-3xl">
-        Hey El-ameen. Ready to share what you know with other students?
+        Hey {data.user?.user_metadata.first_name}. Ready to share what you know with other students?
       </h1>
       <p className="text-muted-foreground text-center text-lg md:text-2xl">
         Fill the options below to register as a tutor.
