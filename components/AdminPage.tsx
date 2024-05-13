@@ -57,9 +57,15 @@ export default async function AdminPage() {
 }
 
 export function AdminUserCard({ users }: { users: any }) {
-  async function deleteUser(id: string) {
+  async function deleteUser(formData: FormData) {
+    "use server"
+
+    const id = formData.get("id") as string
     await supabase.auth.admin.deleteUser(id)
+
+    revalidatePath("/admin")
   }
+
   return (
     <>
       {users.map((item: UserData, index: number) => (
@@ -79,15 +85,9 @@ export function AdminUserCard({ users }: { users: any }) {
                 Edit User
               </Button>
             </form>
-            <form
-              action={async () => {
-                "use server"
-                await supabase.auth.admin.deleteUser(item.id)
-                console.log("hey")
-                revalidatePath("/admin")
-              }}
-            >
-              <Button type="button" variant="destructive">
+            <form action={deleteUser}>
+              <input className="hidden" name="id" value={item.id} />
+              <Button type="submit" variant="destructive">
                 Delete User
               </Button>
             </form>
