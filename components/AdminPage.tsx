@@ -79,12 +79,12 @@ export function AdminUserCard({ users }: { users: any }) {
             <div>Role: {item.user_metadata.role}</div>
             <div>Last Sign In: {item.last_sign_in_at}</div>
           </CardContent>
-          <CardFooter className="grid grid-flow-col justify-between">
-            <form action="">
+          <CardFooter className="">
+            {/* <form action="">
               <Button type="button" variant="outline">
                 Edit User
               </Button>
-            </form>
+            </form> */}
             <form action={deleteUser}>
               <input className="hidden" name="id" value={item.id} />
               <Button type="submit" variant="destructive">
